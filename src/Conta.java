@@ -1,9 +1,8 @@
-package models;
-
 public class Conta {
     private int numero;
-    private double saldo;
+    protected double saldo;
     private Cliente cliente;
+
     public Conta(int numero, double saldo, Cliente cliente) {
         this.numero = numero;
         this.saldo = 0.0;
@@ -25,6 +24,16 @@ public class Conta {
             System.out.println("Saque de R$" + valor + " realizado com sucesso.");
         }else{
             System.out.println("Saldo insuficiente.");
+        }
+    }
+
+    public void transferir(double valor, Conta destino){
+        if(valor > 0 && valor <= saldo){
+            this.saldo -= valor;
+            destino.saldo += valor;
+            System.out.println("Transferência de R$" + valor + " realizada com sucesso para conta: " + destino.getNumero());
+        }else{
+            System.out.println("Transferência não realizada. Verifique seu saldo e tente novamente.");
         }
     }
 

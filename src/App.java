@@ -1,17 +1,18 @@
-import models.Cliente;
-import models.Conta;
-
 public class App {
     public static void main(String[] args) throws Exception {
         Cliente cliente1 = new Cliente("Cliente 1", "123.456.789.00");
-        Conta conta1 = new Conta(1, 0, cliente1);
+        Cliente cliente2 = new Cliente("Cliente 2", "987.654.321.00");
 
-        System.out.println(conta1);
+        ContaCorrente cc = new ContaCorrente(1, cliente1);
+        ContaPoupanca cp = new ContaPoupanca(2, cliente2);
 
-        conta1.depositar(500);
-        conta1.sacar(200);
-        conta1.sacar(400); //deve lançar o erro
+        cc.depositar(1000);
+        cp.depositar(500);
 
-        System.out.println("Saldo final: R$" + conta1.getSaldo());
+        cc.sacar(100);
+        cp.renderJuros();
+
+        System.out.println("Saldo CC: R$" + cc.getSaldo());
+        System.out.println("Saldo CP: R$" + cp.getSaldo());
     }
 }
